@@ -26,7 +26,8 @@ const Pricing = () => {
   //     });
   // }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let getData = new FormData();
     getData.append("firstName", firstName);
     getData.append("lastName", lastName);
