@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 const Pricing = () => {
   const [firstName, setFirstName] = useState("");
@@ -116,6 +117,8 @@ const Pricing = () => {
             <th>Last Name</th>
             <th>Title</th>
             <th>Genre</th>
+            <th>Delete</th>
+            <th>Update</th>
           </tr>
         </thead>
         <tbody>
@@ -126,7 +129,22 @@ const Pricing = () => {
                 <td>{student.lastName}</td>
                 <td>{student.title}</td>
                 <td>{student.genre}</td>
-                <MdDelete id={student.author_id} onClick={handleDelete} />
+                <td className="text-center">
+                  <MdDelete
+                    id={student.author_id}
+                    onClick={handleDelete}
+                    className="icon"
+                    size={30}
+                    style={{ color: "#c4302b" }}
+                  />
+                </td>
+                <td className="text-center">
+                  <FaEdit
+                    size={28}
+                    style={{ color: "#FFC300" }}
+                    className="icon"
+                  />
+                </td>
               </tr>
             );
           })}

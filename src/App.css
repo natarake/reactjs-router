@@ -13,3 +13,7 @@
   height: 100px;
   object-fit: cover;
 }
+
+.icon {
+  cursor: pointer;
+}
