@@ -8,7 +8,8 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/reactjs-router" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
         <Route path="/features" element={<Features />}></Route>
         <Route path="/pricing" element={<Pricing />}></Route>
       </Routes>
