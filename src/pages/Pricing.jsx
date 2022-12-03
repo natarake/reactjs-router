@@ -73,34 +73,42 @@ const Pricing = () => {
       }}
     >
       <h1>Student's List</h1>
-      <form action="">
+      <form className="input-group container" action="">
         <input
           type="text"
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          className="form-control"
         />
         <input
           type="text"
           name="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          className="form-control"
         />
         <input
           type="text"
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="form-control"
         />
         <input
           type="text"
           name="genre"
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
+          className="form-control"
         />
-        <input type="submit" onClick={handleSubmit} />
+        <input
+          type="submit"
+          onClick={handleSubmit}
+          className="btn btn-outline-secondary"
+        />
       </form>
-      <table>
+      <table className="table container">
         <thead>
           <tr>
             <th>First Name</th>
