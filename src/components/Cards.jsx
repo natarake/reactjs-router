@@ -3,8 +3,10 @@ import { CardInfo } from "../data.js";
 
 const Cards = () => {
   return (
-    <div>
-      <SingleCard CardInfo={CardInfo} />
+    <div className="cardContainer container">
+      {CardInfo.map((card) => (
+        <SingleCard card={card} key={card.id} />
+      ))}
     </div>
   );
 };

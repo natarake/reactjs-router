@@ -14,18 +14,8 @@ const Pricing = () => {
     const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
     axios.get(url).then((response) => {
       setStudents(response.data);
-      // console.log(response.data);
     });
   }, []);
-
-  // useEffect(() => {
-  //   fetch("http://localhost/kodegoPHP/server/connect2react/index.php")
-  //     .then((response) => response.json())
-  //     .then((data) => setStudents(data))
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +30,20 @@ const Pricing = () => {
       url: "http://localhost/kodegoPHP/server/connect2react/index.php",
       data: getData,
       config: 'Content-Type = "multipart/form-data"',
-    });
+    })
+      .then(function (response) {
+        const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
+        axios.get(url).then((response) => {
+          setStudents(response.data);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setFirstName("");
+    setLastName("");
+    setTitle("");
+    setGenre("");
   };
 
   const handleDelete = (e) => {
@@ -71,11 +74,11 @@ const Pricing = () => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        height: "500px",
+        minHeight: "500px",
       }}
     >
       <h1>Student's List</h1>
-      <form className="input-group container" action="">
+      <form className="input-group container" onSubmit={handleSubmit}>
         <input
           type="text"
           name="firstName"
@@ -104,11 +107,9 @@ const Pricing = () => {
           onChange={(e) => setGenre(e.target.value)}
           className="form-control"
         />
-        <input
-          type="submit"
-          onClick={handleSubmit}
-          className="btn btn-outline-secondary"
-        />
+        <button type="submit" className="btn btn-outline-secondary">
+          Submit
+        </button>
       </form>
       <table className="table container">
         <thead>
