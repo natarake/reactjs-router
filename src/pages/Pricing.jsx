@@ -4,10 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
 const Pricing = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("");
+  const [inputs, setInputs] = useState([]);
   const [students, setStudents] = useState([]);
   const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
 
@@ -17,19 +14,24 @@ const Pricing = () => {
     });
   }, []);
 
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let getData = new FormData();
-    getData.append("firstName", firstName);
-    getData.append("lastName", lastName);
-    getData.append("title", title);
-    getData.append("genre", genre);
+    getData.append("firstName", inputs.firstName);
+    getData.append("lastName", inputs.lastName);
+    getData.append("title", inputs.title);
+    getData.append("genre", inputs.genre);
     getData.append("function", "insert");
     axios({
       method: "POST",
       url: url,
       data: getData,
-      config: 'Content-Type = "multipart/form-data"',
     })
       .then(function () {
         axios.get(url).then((response) => {
@@ -39,10 +41,7 @@ const Pricing = () => {
       .catch((error) => {
         console.log(error);
       });
-    setFirstName("");
-    setLastName("");
-    setTitle("");
-    setGenre("");
+    setInputs("");
   };
 
   const handleDelete = (e) => {
@@ -53,7 +52,6 @@ const Pricing = () => {
       method: "POST",
       url: url,
       data: getData,
-      config: 'Content-Type = "multipart/form-data"',
     })
       .then(function () {
         axios.get(url).then((response) => {
@@ -80,29 +78,29 @@ const Pricing = () => {
         <input
           type="text"
           name="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          value={inputs.firstName || ""}
+          onChange={handleChange}
           className="form-control"
         />
         <input
           type="text"
           name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          value={inputs.lastName || ""}
+          onChange={handleChange}
           className="form-control"
         />
         <input
           type="text"
           name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={inputs.title || ""}
+          onChange={handleChange}
           className="form-control"
         />
         <input
           type="text"
           name="genre"
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
+          value={inputs.genre || ""}
+          onChange={handleChange}
           className="form-control"
         />
         <button type="submit" className="btn btn-outline-secondary">
