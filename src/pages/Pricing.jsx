@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import TableBody from "../components/TableBody";
+import Input from "../components/Input";
 
 const Pricing = () => {
   const [inputs, setInputs] = useState([]);
@@ -73,40 +73,11 @@ const Pricing = () => {
         minHeight: "500px",
       }}
     >
-      <h1>Student's List</h1>
-      <form className="input-group container" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="firstName"
-          value={inputs.firstName || ""}
-          onChange={handleChange}
-          className="form-control"
-        />
-        <input
-          type="text"
-          name="lastName"
-          value={inputs.lastName || ""}
-          onChange={handleChange}
-          className="form-control"
-        />
-        <input
-          type="text"
-          name="title"
-          value={inputs.title || ""}
-          onChange={handleChange}
-          className="form-control"
-        />
-        <input
-          type="text"
-          name="genre"
-          value={inputs.genre || ""}
-          onChange={handleChange}
-          className="form-control"
-        />
-        <button type="submit" className="btn btn-outline-secondary">
-          Submit
-        </button>
-      </form>
+      <Input
+        inputs={inputs}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       <table className="table container">
         <thead>
           <tr>
@@ -119,26 +90,11 @@ const Pricing = () => {
         </thead>
         <tbody>
           {students.map((student) => (
-            <tr key={student.author_id}>
-              <td>{student.firstName}</td>
-              <td>{student.lastName}</td>
-              <td>{student.title}</td>
-              <td>{student.genre}</td>
-              <td className="d-flex gap-3 text-center">
-                <MdDelete
-                  id={student.author_id}
-                  onClick={handleDelete}
-                  className="icon"
-                  size={30}
-                  style={{ color: "#c4302b" }}
-                />
-                <FaEdit
-                  size={28}
-                  style={{ color: "#FFC300" }}
-                  className="icon"
-                />
-              </td>
-            </tr>
+            <TableBody
+              student={student}
+              key={student.author_id}
+              handleDelete={handleDelete}
+            />
           ))}
         </tbody>
       </table>

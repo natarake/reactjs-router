@@ -1,7 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Home, Features, Pricing } from "./pages";
-import { Header, Footer } from "./components";
+import Home from "./pages/Home";
+import Features from "./pages/Features";
+import Pricing from "./pages/Pricing";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
