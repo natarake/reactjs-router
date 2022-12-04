@@ -9,9 +9,9 @@ const Pricing = () => {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [students, setStudents] = useState([]);
+  const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
 
   useEffect(() => {
-    const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
     axios.get(url).then((response) => {
       setStudents(response.data);
     });
@@ -27,12 +27,11 @@ const Pricing = () => {
     getData.append("function", "insert");
     axios({
       method: "POST",
-      url: "http://localhost/kodegoPHP/server/connect2react/index.php",
+      url: url,
       data: getData,
       config: 'Content-Type = "multipart/form-data"',
     })
-      .then(function (response) {
-        const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
+      .then(function () {
         axios.get(url).then((response) => {
           setStudents(response.data);
         });
@@ -52,12 +51,11 @@ const Pricing = () => {
     getData.append("function", "delete");
     axios({
       method: "POST",
-      url: "http://localhost/kodegoPHP/server/connect2react/index.php",
+      url: url,
       data: getData,
       config: 'Content-Type = "multipart/form-data"',
     })
-      .then(function (response) {
-        const url = "http://localhost/kodegoPHP/server/connect2react/index.php";
+      .then(function () {
         axios.get(url).then((response) => {
           setStudents(response.data);
         });
@@ -118,37 +116,32 @@ const Pricing = () => {
             <th>Last Name</th>
             <th>Title</th>
             <th>Genre</th>
-            <th>Delete</th>
-            <th>Update</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => {
-            return (
-              <tr key={student.author_id}>
-                <td>{student.firstName}</td>
-                <td>{student.lastName}</td>
-                <td>{student.title}</td>
-                <td>{student.genre}</td>
-                <td className="text-center">
-                  <MdDelete
-                    id={student.author_id}
-                    onClick={handleDelete}
-                    className="icon"
-                    size={30}
-                    style={{ color: "#c4302b" }}
-                  />
-                </td>
-                <td className="text-center">
-                  <FaEdit
-                    size={28}
-                    style={{ color: "#FFC300" }}
-                    className="icon"
-                  />
-                </td>
-              </tr>
-            );
-          })}
+          {students.map((student) => (
+            <tr key={student.author_id}>
+              <td>{student.firstName}</td>
+              <td>{student.lastName}</td>
+              <td>{student.title}</td>
+              <td>{student.genre}</td>
+              <td className="d-flex gap-3 text-center">
+                <MdDelete
+                  id={student.author_id}
+                  onClick={handleDelete}
+                  className="icon"
+                  size={30}
+                  style={{ color: "#c4302b" }}
+                />
+                <FaEdit
+                  size={28}
+                  style={{ color: "#FFC300" }}
+                  className="icon"
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
